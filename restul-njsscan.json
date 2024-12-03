@@ -1,0 +1,54 @@
+{
+  "errors": [
+    {
+      "code": 2,
+      "level": "warn",
+      "message": "Timeout when running express_open_redirect2 on juice-shop/frontend/src/assets/private/three.js:\n ",
+      "path": "juice-shop/frontend/src/assets/private/three.js",
+      "rule_id": "express_open_redirect2",
+      "type": "Timeout"
+    },
+    {
+      "code": 2,
+      "level": "warn",
+      "message": "Timeout when running join_resolve_path_traversal on juice-shop/frontend/src/assets/private/three.js:\n ",
+      "path": "juice-shop/frontend/src/assets/private/three.js",
+      "rule_id": "join_resolve_path_traversal",
+      "type": "Timeout"
+    },
+    {
+      "code": 2,
+      "level": "warn",
+      "message": "Timeout when running node_nosqli_js_injection on juice-shop/frontend/src/assets/private/three.js:\n ",
+      "path": "juice-shop/frontend/src/assets/private/three.js",
+      "rule_id": "node_nosqli_js_injection",
+      "type": "Timeout"
+    }
+  ],
+  "njsscan_version": "0.4.0",
+  "nodejs": {
+    "node_md5": {
+      "files": [
+        {
+          "file_path": "juice-shop/Gruntfile.js",
+          "match_lines": [
+            77,
+            77
+          ],
+          "match_position": [
+            19,
+            43
+          ],
+          "match_string": "      const md5 = crypto.createHash('md5')"
+        }
+      ],
+      "metadata": {
+        "cwe": "CWE-327: Use of a Broken or Risky Cryptographic Algorithm",
+        "description": "MD5 is a a weak hash which is known to have collision. Use a strong hashing function.",
+        "owasp-web": "A9: Using Components with Known Vulnerabilities",
+        "severity": "WARNING"
+      }
+    }
+  },
+  "templates": {}
+}
