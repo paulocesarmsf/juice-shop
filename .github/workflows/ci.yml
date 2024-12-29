@@ -11,6 +11,8 @@ jobs:
       image: squadappsec/cli:latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Run security pipeline
         env:
           CI_REPOSITORY_URL: https://github.com/${{ github.repository }}.git
