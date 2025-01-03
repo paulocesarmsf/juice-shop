@@ -13,6 +13,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
       - name: Run security pipeline
         env:
           CI_REPOSITORY_URL: https://github.com/${{ github.repository }}.git
@@ -21,3 +22,9 @@ jobs:
         run: |
           python /squadappsec/app.py --project $GITHUB_WORKSPACE -i test --break-pipeline high
           python /squadappsec/app.py --project $GITHUB_WORKSPACE --update-fixed-vulnerabilities
+
+  echo-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo a message
+        run: echo "This is the second job running in the pipeline"
