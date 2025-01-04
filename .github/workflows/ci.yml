@@ -28,11 +28,3 @@ jobs:
     steps:
       - name: Echo a message
         run: echo "This is the second job running in the pipeline"
-
-  echo-stage:
-    name: Echo Stage
-    runs-on: ubuntu-latest
-    needs: security-analysis
-    steps:
-      - name: Echo a message
-        run: echo "This is the second stage running after the Security Analysis stage"
