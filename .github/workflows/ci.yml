@@ -29,3 +29,8 @@ jobs:
       - name: Echo a message
         run: echo "This is the second job running in the pipeline"
 
+  echo-second-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo a second message
+        run: echo "This is the second job running in the pipeline"
