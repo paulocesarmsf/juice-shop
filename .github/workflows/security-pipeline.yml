@@ -9,9 +9,9 @@ on:
       CI_COMMIT_REF_NAME:
         required: true
         type: string
+    secrets:
       SQUADAPPSEC_APIKEY:
         required: true
-        type: string
 
 jobs:
   security:
@@ -27,7 +27,7 @@ jobs:
         env:
           CI_REPOSITORY_URL: ${{ inputs.CI_REPOSITORY_URL }}
           CI_COMMIT_REF_NAME: ${{ inputs.CI_COMMIT_REF_NAME }}
-          SQUADAPPSEC_APIKEY: ${{ inputs.SQUADAPPSEC_APIKEY }}
+          SQUADAPPSEC_APIKEY: ${{ secrets.SQUADAPPSEC_APIKEY }}
         run: |
           python /squadappsec/app.py --project $GITHUB_WORKSPACE -i test --break-pipeline high
           python /squadappsec/app.py --project $GITHUB_WORKSPACE --update-fixed-vulnerabilities
