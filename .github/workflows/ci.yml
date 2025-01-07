@@ -40,5 +40,5 @@ jobs:
     uses: ./.github/workflows/security-pipeline.yml
     with:
       CI_REPOSITORY_URL: https://github.com/${{ github.repository }}.git
-      CI_COMMIT_REF_NAME: ${{ env.GITHUB_REF_NAME }}
+      CI_COMMIT_REF_NAME: ${{ github.ref_name }}
       SQUADAPPSEC_APIKEY: ${{ secrets.SQUADAPPSEC_APIKEY }}
