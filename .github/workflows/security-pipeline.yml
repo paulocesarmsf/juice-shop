@@ -1,0 +1,33 @@
+name: Security Pipeline
+
+on:
+  workflow_call:
+    inputs:
+      CI_REPOSITORY_URL:
+        required: true
+        type: string
+      CI_COMMIT_REF_NAME:
+        required: true
+        type: string
+      SQUADAPPSEC_APIKEY:
+        required: true
+        type: string
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    container:
+      image: squadappsec/cli:latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Run security pipeline
+        env:
+          CI_REPOSITORY_URL: ${{ inputs.CI_REPOSITORY_URL }}
+          CI_COMMIT_REF_NAME: ${{ inputs.CI_COMMIT_REF_NAME }}
+          SQUADAPPSEC_APIKEY: ${{ inputs.SQUADAPPSEC_APIKEY }}
+        run: |
+          python /squadappsec/app.py --project $GITHUB_WORKSPACE -i test --break-pipeline high
+          python /squadappsec/app.py --project $GITHUB_WORKSPACE --update-fixed-vulnerabilities
