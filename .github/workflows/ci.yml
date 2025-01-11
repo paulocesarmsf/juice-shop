@@ -20,5 +20,5 @@ jobs:
           CI_COMMIT_REF_NAME: ${{ env.GITHUB_REF_NAME }}
           SQUADAPPSEC_APIKEY: ${{ secrets.SQUADAPPSEC_APIKEY }}
         run: |
-          python /squadappsec/app.py --project $GITHUB_WORKSPACE -i test -s secret,iac,sast --break-pipeline high
+          python /squadappsec/app.py --project $GITHUB_WORKSPACE -i test -s secret,iac,sast,sca --break-pipeline high
           python /squadappsec/app.py --project $GITHUB_WORKSPACE --update-fixed-vulnerabilities
