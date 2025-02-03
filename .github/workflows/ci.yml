@@ -20,5 +20,26 @@ jobs:
           CI_COMMIT_REF_NAME: ${{ env.GITHUB_REF_NAME }}
           SQUADAPPSEC_APIKEY: ${{ secrets.SQUADAPPSEC_APIKEY }}
         run: |
-          python /squadappsec/app.py --project $GITHUB_WORKSPACE -i test -s secret,iac,sast,sca --break-pipeline high
+          python /squadappsec/app.py --project $GITHUB_WORKSPACE -i test --break-pipeline high
           python /squadappsec/app.py --project $GITHUB_WORKSPACE --update-fixed-vulnerabilities
+
+  echo-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo a message
+        run: echo "This is the second job running in the pipeline"
+
+  echo-second-job:
+    needs: echo-job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo a second message
+        run: echo "This is the second job running in the pipeline"
+
+  external-security-pipeline:
+    uses: ./.github/workflows/security-pipeline.yml
+    with:
+      CI_REPOSITORY_URL: https://github.com/${{ github.repository }}.git
+      CI_COMMIT_REF_NAME: ${{ github.ref_name }}
+    secrets:
+      SQUADAPPSEC_APIKEY: ${{ secrets.SQUADAPPSEC_APIKEY }}
